@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('individual_entities', function (Blueprint $table) {
+        Schema::create('certificate_expirations', function (Blueprint $table) {
             $table->id();
-            $table->string('applicant_name');
-            $table->string('national_id')->unique();
-            $table->text('address');
-            $table->string('mobile_number');
-            $table->string('email')->unique();
-            $table->string('status')->default('Active');
-
+            $table->text('certificate_duration')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('individual_entities');
+        Schema::dropIfExists('certificate_expirations');
     }
 };

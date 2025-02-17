@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('organization_entity_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organization_id')->constrained('organization_entities')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('expiration_id')->constrained('certificate_expirations')->onUpdate('cascade');
+            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }

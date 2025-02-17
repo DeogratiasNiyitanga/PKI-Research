@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fonts.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
     @livewireStyles
 </head>
 
@@ -32,6 +33,7 @@
     @yield('footer')
 
     <script src="{{ asset('assets/js/main.js') }}" data-navigate-track></script>
+
     @livewireScripts
 </body>
 

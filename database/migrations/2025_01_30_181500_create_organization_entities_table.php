@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('organization_name');
             $table->string('tin')->unique();
-            $table->string('short_name');
+            $table->string('short_name')->nullable()->unique();
             $table->string('md_ceo_name');
             $table->string('organization_address');
             $table->string('status')->default('Active');
