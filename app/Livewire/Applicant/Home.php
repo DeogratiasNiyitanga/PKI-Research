@@ -115,7 +115,7 @@ class Home extends Component
 
         try {
             if ($this->individualSection) {
-                IndividualEntity::updateOrCreate(
+                $individual = IndividualEntity::updateOrCreate(
                     ['national_id' => $this->nationalId],
                     [
                         'applicant_name' => $this->applicantName,
@@ -124,8 +124,15 @@ class Home extends Component
                         'email' => $this->email
                     ]
                 );
+
+                if ($individual->wasRecentlyCreated) {
+                    flash()->success('Registration done successfully.');
+                } else {
+                    flash()->warning('Your information was already registered and is kept safely. Any updates to the information associated with this NID have been recorded well.');
+                }
+                $this->reset();
             } else {
-                OrganizationEntity::updateOrCreate(
+                $organization = OrganizationEntity::updateOrCreate(
                     ['tin' => $this->tin],
                     [
                         'organization_name' => $this->organizationName,
@@ -134,10 +141,16 @@ class Home extends Component
                         'organization_address' => $this->organizationAddress,
                     ]
                 );
+
+                if ($organization->wasRecentlyCreated) {
+                    flash()->success('Organization registration done successfully.');
+                } else {
+                    flash()->warning('Your organization information was already registered and is kept safely. Any updates to the information associated with this TIN have been recorded well.');
+                }
+                $this->reset();
             }
 
-            flash()->success('Registration done successfully.');
-            $this->reset();
+
         } catch (Exception $e) {
             flash()->error('Error occurred: ' . $e->getMessage());
         }

@@ -31,6 +31,10 @@ class ApplyCertificate extends Component
     public function mount()
     {
         // Get the default expiration (12 months)
+        // $defaultExpiration = CertificateExpiration::where('certificate_duration', 'like', '%12 month%')
+        //     ->where('status', 'active')
+        //     ->first();
+
         $defaultExpiration = CertificateExpiration::where('certificate_duration', 'like', '%12 month%')
             ->where('status', 'active')
             ->first();
@@ -217,7 +221,7 @@ class ApplyCertificate extends Component
             return $createdAt->copy()->addMonths(12);
         }
 
-        $number = (int)$matches[1];
+        $number = (int) $matches[1];
         $unit = strtolower(trim($matches[2]));
 
         // Handle plural forms
